@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="bulk_sms" sortOrder="10">
+                <settings>
+                    <url path="mitto_bulk/send/index"/>
+                    <type>send_bulk</type>
+                    <label translate="true">Send SMS</label>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mitto_Core::bulk"
+             title="CSV upload"
+             translate="title"
+             module="Mitto_Core"
+             sortOrder="1"
+             parent="Mitto_Core::menu"
+             action="mitto_bulk/csv/index"
+             resource="Mitto_Core::bulk"/>
+    </menu>
+</config>

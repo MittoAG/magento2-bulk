@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">mitto_bulk_send_csv_form.mitto_bulk_send_csv_form_data_source</item>
+            <item name="deps" xsi:type="string">mitto_bulk_send_csv_form.mitto_bulk_send_csv_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Object Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">mitto_bulk_send_csv_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">customer/index/index</item>
+            </item>
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string">Send</item>
+                <item name="class" xsi:type="string">primary save</item>
+                <item name="data_attribute" xsi:type="array">
+                    <item name="mage-init" xsi:type="array">
+                        <item name="button" xsi:type="array">
+                            <item name="event" xsi:type="string">save</item>
+                        </item>
+                    </item>
+                    <item name="form-role" xsi:type="string">save</item>
+                </item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="mitto_bulk_send_csv_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mitto\Bulk\Model\CSV\DataProvider</argument>
+            <argument name="name" xsi:type="string">mitto_bulk_send_csv_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/send"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">CSV</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <field name="sender" formElement="input" sortOrder="20">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Sender</label>
+            </settings>
+        </field>
+        <field name="use_existing_template" formElement="checkbox" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>boolean</dataType>
+                <label translate="true">Use existing template</label>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>0</value>
+                            <actions>
+                                <action name="0">
+                                    <target>mitto_bulk_send_csv_form.mitto_bulk_send_csv_form.general.template_id</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>mitto_bulk_send_csv_form.mitto_bulk_send_csv_form.general.template</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>mitto_bulk_send_csv_form.mitto_bulk_send_csv_form.general.template_id</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>mitto_bulk_send_csv_form.mitto_bulk_send_csv_form.general.template</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="template_id" formElement="select" sortOrder="40">
+            <settings>
+                <label translate="true">Choose template</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Mitto\Core\Model\Config\Source\Template"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="template" component="Mitto_Core/js/form/template" formElement="textarea" sortOrder="50">
+            <settings>
+                <label translate="true">Enter template</label>
+                <visible>false</visible>
+            </settings>
+        </field>
+    </fieldset>
+</form>
