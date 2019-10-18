@@ -1,9 +1,9 @@
 {
-    "name": "mitto-ag/magento2-bulk",
+    "name": "mitto/magento2-bulk",
     "description": "Mitto bulk SMS sending",
     "require": {
         "magento/framework": "100.*|101.*|102.*",
-        "mitto-ag/magento2-core": ">=0.0.1"
+        "mitto/magento2-core": ">=0.0.1"
     },
     "type": "magento2-module",
     "version": "0.0.2",
